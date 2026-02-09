@@ -1,2 +1,3 @@
-# ai
-skills, tools, agents, .md files
+# Vincenzos AI resources
+
+Skills, Tools, Agents, .md files
