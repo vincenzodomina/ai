@@ -2,6 +2,9 @@
 
 ```bash
 npx skills add supabase/agent-skills
+https://github.com/vercel-labs/agent-browser/tree/main/skills
+https://github.com/nicobailon/visual-explainer
+https://github.com/blader/humanizer
 ```
 
 ##
