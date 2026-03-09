@@ -17,3 +17,9 @@ https://github.com/vincenzodomina/office2llm
 
 - FFmpeg
 https://www.ffmpeg.org/download.html
+
+- ripgrep
+https://github.com/BurntSushi/ripgrep
+```bash
+ brew install ripgrep
+```
