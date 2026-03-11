@@ -23,3 +23,9 @@ https://github.com/BurntSushi/ripgrep
 ```bash
  brew install ripgrep
 ```
+
+- QMD - Query Markup Documents
+https://github.com/tobi/qmd
+```bash
+npm install -g @tobilu/qmd
+```
