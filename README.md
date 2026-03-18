@@ -24,8 +24,17 @@ https://github.com/BurntSushi/ripgrep
  brew install ripgrep
 ```
 
+- Obsidian
+CLI comes with local desktop dmg install
+```bash
+https://github.com/obsidianmd/obsidian-releases/releases/download/v1.12.4/Obsidian-1.12.4.dmg
+obsidian help
+```
+
 - QMD - Query Markup Documents
 https://github.com/tobi/qmd
 ```bash
 npm install -g @tobilu/qmd
+qmd collection add ~/vault --name notes
+qmd embed
 ```
