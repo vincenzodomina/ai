@@ -15,3 +15,5 @@ https://github.com/JuliusBrussee/caveman
 Dependabot
 https://skills.sh/github/awesome-copilot/dependabot
 ##
+
+https://github.com/nicobailon/visual-explainer
