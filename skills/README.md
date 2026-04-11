@@ -17,3 +17,6 @@ https://skills.sh/github/awesome-copilot/dependabot
 ##
 
 https://github.com/nicobailon/visual-explainer
+
+
+https://github.com/supabase/agent-skills
