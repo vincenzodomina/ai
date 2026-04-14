@@ -20,3 +20,6 @@ https://github.com/nicobailon/visual-explainer
 
 
 https://github.com/supabase/agent-skills
+
+
+https://github.com/mattpocock/skills/blob/main/grill-me/SKILL.md
