@@ -1,6 +1,6 @@
 ---
 name: audit-instructions
-description: Explain unexpected behavior + Propose instruction improvements
+description: At any point you expected different behavior or results from the agent, use this skill to audit the inputs and it explains what went wrong and proposes improvements to the skills or prompts
 ---
 
 ### Audit Instructions
