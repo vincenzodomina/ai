@@ -5,7 +5,7 @@ description: Conduct thorough code reviews with structured feedback on security,
 
 # Code Review
 
-Review the code pointed at or the recent changes by viewing the latest git commits. Also review how this code is integrated and interacts with the rest of the codebase.
+Review thoroughly the code pointed at or the recent changes by viewing the latest git commits. Also review how this code is integrated and interacts with the rest of the codebase.
 
 ## Criteria
 
@@ -26,6 +26,7 @@ Check for:
 
 ### 2. Performance Review
 Check for:
+- Obvious performance issues
 - N+1 queries
 - Missing database indexes
 - Unnecessary re-renders (React)
@@ -50,6 +51,7 @@ Check for:
 - Overly defensive code instead of clear boundaries and interfaces
 - Fit into the overall architecture and design patterns
 - Potential for lean and clean code
+- Types/Interfaces defined and used
 
 ### 4. Inconsintencies / Unexpected behaviors
 Check for:
@@ -58,8 +60,16 @@ Check for:
 - Potential errors in code behavior
 - Code resulting in bad user experience
 - Typos and Grammar of user facing strings
+- Breaking changes documented
 
 ## Output Format
+
+1. **Be constructive and educational** - Help developers learn, don't just criticize
+2. **Provide context** - Explain why something matters
+3. **Show examples** - Code speaks louder than descriptions
+4. **Be specific** - Exact files and lines, not vague references
+5. **Prioritize correctly** - Not everything is critical
+6. **Reference:** Check existing testing documentation or guidelines to review against
 
 ```markdown
 ## Code Review Summary
@@ -81,11 +91,10 @@ Check for:
 - [Positive feedback on good patterns]
 ```
 
-## Checklist
+## Success Criteria
 
-- [ ] No hardcoded secrets
-- [ ] Input validation present
-- [ ] Types/interfaces defined
-- [ ] No obvious performance issues
-- [ ] Code is readable and documented
-- [ ] Breaking changes documented
+A successful review:
+- ✅ Scans the entire pointed at code and surrounding codebase thoroughly
+- ✅ Cross-checks against documentation and references
+- ✅ Identifies all critical issues
+- ✅ Provides code review in the correct output format
