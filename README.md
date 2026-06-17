@@ -38,3 +38,29 @@ npm install -g @tobilu/qmd
 qmd collection add ~/vault --name notes
 qmd embed
 ```
+
+## Other Awesome Skills
+
+```bash
+npx skills add supabase/agent-skills
+https://github.com/vercel-labs/agent-browser/tree/main/skills
+https://github.com/nicobailon/visual-explainer
+https://github.com/blader/humanizer
+```
+
+
+Caveman token saving
+
+https://github.com/JuliusBrussee/caveman
+
+Dependabot
+https://skills.sh/github/awesome-copilot/dependabot
+##
+
+https://github.com/nicobailon/visual-explainer
+
+
+https://github.com/supabase/agent-skills
+
+
+https://github.com/mattpocock/skills/blob/main/grill-me/SKILL.md
