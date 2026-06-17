@@ -1,7 +1,6 @@
 ---
 name: code-review
 description: Conduct thorough code reviews with structured feedback on security, performance, architecture, and testing. Generates trackable review documents with prioritized issues (critical/required/suggestions) and educational content. Use when reviewing PRs or code changes. Triggers on "review this code", "code review", "review PR".
-disable-model-invocation: true
 ---
 
 # Code Review Process (LLM Prompt)

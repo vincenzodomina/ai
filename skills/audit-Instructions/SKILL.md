@@ -1,3 +1,8 @@
+---
+name: audit-instructions
+description: Explain unexpected behavior + Propose instruction improvements
+---
+
 ### Audit Instructions
 
 What you just did is not what i expected.
