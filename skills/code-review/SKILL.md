@@ -25,53 +25,57 @@ Reference these throughout the review to ensure consistency, matching specs, fin
 
 ## Review Categories
 
-1. **Security**
-   - Input validation and sanitization
-   - Authentication and authorization
-   - Data exposure risks
-   - Injection vulnerabilities
-   - Sensitive data handling
-   - Access control patterns
+### 1. Security
+Check for:
+- Injection vulnerabilities
+- Known web attack surfaces (XSS, SQL injection, etc.)
+- Authentication and authorization
+- Data exposure risks
+- Command injection
+- Insecure deserialization
+- Hardcoded secrets/credentials
+- Improper authentication/authorization
+- Insecure direct object references
+- Input validation and sanitization
 
-2. **Performance & Efficiency**
-   - Algorithm complexity
-   - Memory usage patterns
-   - Database/data store query optimization
-   - Caching strategies
-   - Unnecessary computations
-   - Resource management
+### 2. Performance
+Check for:
+- Obvious performance issues
+- N+1 queries
+- Missing database indexes
+- Unnecessary re-renders (React)
+- Memory leaks
+- Blocking operations in async code
+- Missing caching opportunities
+- Large bundle sizes
+- Unnecessary computations
 
-3. **Code Quality & Patterns**
-   - Readability and maintainability
-   - Naming conventions (functions, variables, classes)
-   - Function/class size and Single Responsibility
-   - Code duplication (DRY principle)
-   - Consistency with established patterns
-   - Magic numbers and hardcoded values
+### 3. Code Quality
+Check for:
+- Code duplication (DRY violations)
+- Functions doing too much (SRP violations)
+- Deep nesting / complex conditionals
+- Magic numbers/strings
+- Poor naming
+- Missing error handling
+- Incomplete type coverage
+- Unnecessary complexity
+- Unnecessary edits
+- Brittle code
+- Overly defensive code instead of clear boundaries and interfaces
+- Fit into the overall architecture and design patterns
+- Potential for lean and clean code
+- Types/Interfaces defined and used
+- Magic numbers and hardcoded values
 
-4. **Architecture & Design**
-   - Design pattern usage and appropriateness
-   - Separation of concerns
-   - Dependency management
-   - Error handling strategy
-   - API/interface design
-   - Data modeling decisions
-   - Module organization and coupling
-
-5. **Testing Coverage**
-   - Test completeness and quality
-   - Test organization and naming
-   - Mock/stub usage patterns
-   - Edge case coverage
-   - Test maintainability
-   - Integration vs unit test balance
-
-6. **Documentation**
-   - API documentation (language-appropriate: YARD, TSDoc, JSDoc, docstrings, etc.)
-   - Code comments (what/why, not how)
-   - README updates if needed
-   - Breaking changes documented
-   - Migration/upgrade guides if needed
+### 4. Inconsintencies / Unexpected behaviors
+Check for:
+- Spec / comments mismatch to actual code
+- Obvious misconfigurations
+- Potential errors in code behavior
+- Code resulting in bad user experience
+- Typos and Grammar of user facing strings
+- Breaking changes documented
 
 ## Output Format
 

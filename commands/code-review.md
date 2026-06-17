@@ -25,7 +25,7 @@ Reference these throughout the review to ensure consistency, matching specs, fin
 
 ## Review Categories
 
-### 1. Security Review
+### 1. Security
 Check for:
 - SQL injection vulnerabilities
 - XSS (Cross-Site Scripting)
@@ -34,8 +34,9 @@ Check for:
 - Hardcoded secrets/credentials
 - Improper authentication/authorization
 - Insecure direct object references
+- Input validation and sanitization
 
-### 2. Performance Review
+### 2. Performance
 Check for:
 - Obvious performance issues
 - N+1 queries
@@ -45,8 +46,9 @@ Check for:
 - Blocking operations in async code
 - Missing caching opportunities
 - Large bundle sizes
+- Unnecessary computations
 
-### 3. Code Quality Review
+### 3. Code Quality
 Check for:
 - Code duplication (DRY violations)
 - Functions doing too much (SRP violations)
@@ -57,12 +59,12 @@ Check for:
 - Incomplete type coverage
 - Unnecessary complexity
 - Unnecessary edits
-- Redundancy
 - Brittle code
 - Overly defensive code instead of clear boundaries and interfaces
 - Fit into the overall architecture and design patterns
 - Potential for lean and clean code
 - Types/Interfaces defined and used
+- Magic numbers and hardcoded values
 
 ### 4. Inconsintencies / Unexpected behaviors
 Check for:
