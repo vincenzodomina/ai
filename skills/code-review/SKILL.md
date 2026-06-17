@@ -1,31 +1,29 @@
 ---
 name: code-review
-description: Conduct thorough code reviews with structured feedback on security, performance, architecture, and testing. Generates trackable review documents with prioritized issues (critical/required/suggestions) and educational content. Use when reviewing PRs or code changes. Triggers on "review this code", "code review", "review PR".
+description: Conduct thorough code reviews with structured feedback on security, performance, quality, and testing. Generates trackable review documents with prioritized issues (critical/required/suggestions) and educational content. Use when reviewing PRs or code changes. Triggers on "review this code", "code review", "review PR".
 ---
 
 # Code Review Process
 
-## Role & Context
+Review thoroughly the code pointed at or the recent changes by viewing the latest git commits. Also review how this code is integrated and interacts with the rest of the codebase.
 
-You are a senior software engineer conducting a thorough code review. Your goal is to provide constructive, actionable, and educational feedback that helps developers grow while maintaining code quality.
+Mindset:
+- How would a senior expert approach the intended code?
+- Which issues would he spot?
+- Which potential problems would he point out?
 
-## Available Documentation
+## Review Preparation
 
-Before starting the review, check if the project has:
-- **Style guides** and coding standards
-- **Architecture documentation** and design patterns
-- **Testing guidelines** and best practices
-- **API documentation** and contracts
-- **Security guidelines** and authentication patterns
-- **Development process documentation**
+Before starting the review, check for documents to review against:
+- Vision/goals documents
+- Requirements or user stories
+- Technical / Architecture specifications
+- Implementation plans
+- Style guides / Coding standards / Design documents
 
-Reference these throughout the review to ensure consistency with established patterns.
+Reference these throughout the review to ensure consistency, matching specs, find gaps or deviations and ensure the implementation satisfies stated requirements.
 
-## Review Workflow
-
-### Phase 1: Initial Comprehensive Scan
-
-Analyze all changes in the PR/branch for:
+## Review Categories
 
 1. **Security**
    - Input validation and sanitization
@@ -75,77 +73,6 @@ Analyze all changes in the PR/branch for:
    - Breaking changes documented
    - Migration/upgrade guides if needed
 
-### Phase 2: Feature Documentation Verification (If Applicable)
-
-**Ask the user:** "Are there feature documents I should cross-check against? (spec, requirements, plan)"
-
-**If your project uses structured feature documentation:**
-
-Check for documents like:
-- Vision/goals documents
-- Requirements or user stories
-- Technical specifications
-- Implementation plans
-- Design documents
-
-**Typical locations to check:**
-- `docs/features/[FEATURE_NAME]/`
-- `project/features/[FEATURE_NAME]/`
-- `specs/[FEATURE_NAME]/`
-- Or ask user for location
-
-**If documents exist:**
-
-**Check against Spec (Primary):**
-- Verify all specified features are implemented
-- Check data models match specifications
-- Verify API contracts match spec
-- Confirm UI components match spec (if applicable)
-- Flag any deviations or incomplete items
-
-**Check against Plan (Implementation):**
-- Verify implementation approach matches planned approach
-- Check that all planned phases/tasks are complete (for this PR)
-- Identify any architectural deviations
-- Note any planned features that are missing
-
-**Check against Requirements (Context):**
-- Ensure implementation satisfies stated requirements
-- Verify edge cases from requirements are handled
-- Check that acceptance criteria are met
-
-**If no structured documentation:**
-- Proceed with review based on code alone
-
-### Phase 3: Test Pattern Analysis
-
-Review test files specifically for:
-
-1. **Test organization:**
-   - Logical grouping and nesting
-   - Clear test descriptions
-   - One assertion per test (when practical)
-   - Proper setup/teardown
-
-2. **Testing guidelines conformance:**
-   - File organization (location, naming)
-   - Test data creation patterns
-   - Mock/stub usage
-   - Shared setup/context usage
-   - Test naming conventions
-
-3. **Common anti-patterns:**
-   - Testing private methods/implementation details
-   - Over-specification (testing framework internals)
-   - Missing edge cases
-   - Brittle tests (fragile assertions, tight coupling)
-   - Test data pollution (outer contexts with excessive shared setup that bleeds into unrelated tests - use nested contexts to scope data appropriately)
-   - Global state mutation
-   - Time-dependent tests without proper mocking
-   - Flaky tests (non-deterministic behavior)
-
-**Reference:** Check if project has testing documentation or guidelines.
-
 ## Output Format
 
 1. **Be constructive and educational** - Help developers learn, don't just criticize
@@ -153,37 +80,25 @@ Review test files specifically for:
 3. **Show examples** - Code speaks louder than descriptions
 4. **Be specific** - Exact files and lines, not vague references
 5. **Prioritize correctly** - Not everything is critical
-6. **Acknowledge good work** - Point out what's done well
-7. **Make it trackable** - Checklists and clear action items
-8. **Remember context** - Previous decisions inform future recommendations
-9. **Be consistent** - Follow established patterns in the codebase
-10. **Stay professional** - Constructive, respectful, supportive tone
+6. **Reference:** Check existing testing documentation to refer to
 
-### 🔴 Critical Issues (Must Fix Before Merge)
-- [ ] **Issue #1:** [Short description]
-  - **File:** [path] (line X)
-  - **Details:** See §1 below
+```markdown
+### 🔴 Critical (Must Fix)
+- **[File:Line]** [Issue description]
+  - **Why:** [Explanation]
+  - **Fix:** [Suggested fix]
 
-### ⚠️ Required Changes (Must Fix Before Merge)
-- [ ] **Issue #X:** [Short description]
-  - **File:** [path] (lines X-Y)
-  - **Details:** See §X below
+### 🟡 Suggestions (Should Consider)
+- **[File:Line]** [Issue description]
+  - **Why:** [Explanation]
+  - **Fix:** [Suggested fix]
 
-### 💡 Suggestions (Consider)
-- [ ] **Issue #X:** [Short description]
-  - **File:** [path]
-  - **Details:** See §X below
+### 🟢 Nits (Optional)
+- **[File:Line]** [Minor suggestion]
 
-### 📚 Testing Issues (If Applicable)
-- [ ] **Issue #X:** [Short description with specific line numbers]
-  - **File:** [path]
-  - **Lines to fix:** [specific lines]
-  - **Details:** See Appendix A below
-
-### 📝 Advisory Notes (Future Considerations)
-- [ ] **Issue #X:** [Short description]
-  - **Details:** See §X below (not blocking)
-
+### ✅ What's Good
+- [Positive feedback on good patterns]
+```
 
 ## Success Criteria
 

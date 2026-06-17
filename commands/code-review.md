@@ -3,16 +3,27 @@ name: code-review
 description: Conduct thorough code reviews with structured feedback on security, performance, quality, and testing. Generates trackable review documents with prioritized issues (critical/required/suggestions) and educational content. Use when reviewing PRs or code changes. Triggers on "review this code", "code review", "review PR".
 ---
 
-# Code Review
+# Code Review Process
 
 Review thoroughly the code pointed at or the recent changes by viewing the latest git commits. Also review how this code is integrated and interacts with the rest of the codebase.
 
-## Criteria
-
-### 0. Questions
+Mindset:
 - How would a senior expert approach the intended code?
 - Which issues would he spot?
 - Which potential problems would he point out?
+
+## Review Preparation
+
+Before starting the review, check for documents to review against:
+- Vision/goals documents
+- Requirements or user stories
+- Technical / Architecture specifications
+- Implementation plans
+- Style guides / Coding standards / Design documents
+
+Reference these throughout the review to ensure consistency, matching specs, find gaps or deviations and ensure the implementation satisfies stated requirements.
+
+## Review Categories
 
 ### 1. Security Review
 Check for:
@@ -69,11 +80,9 @@ Check for:
 3. **Show examples** - Code speaks louder than descriptions
 4. **Be specific** - Exact files and lines, not vague references
 5. **Prioritize correctly** - Not everything is critical
-6. **Reference:** Check existing testing documentation or guidelines to review against
+6. **Reference:** Check existing testing documentation to refer to
 
 ```markdown
-## Code Review Summary
-
 ### 🔴 Critical (Must Fix)
 - **[File:Line]** [Issue description]
   - **Why:** [Explanation]
