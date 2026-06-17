@@ -1,6 +1,6 @@
 ---
 name: unblock
-description: Audit your sessions or a project's dev stack + SDLC for the roadblocks that recurringly stall you, then lift or route around them — fewer handoffs, less human-in-the-loop, more automation. Use when the user wants to "unblock" you, work faster/more efficiently, find what keeps stalling agents, or run a project's dev env end-to-end. Subcommands: `/unblock` (audit), `/unblock run <project>` (boot dev env e2e), `/unblock bootstrap <project>` (write the non-negotiable bootstrap files).
+description: Audit your sessions or a project's dev stack + SDLC for the roadblocks that recurringly stall you, then lift or route around them — fewer handoffs, less human-in-the-loop, more automation. Use when the user wants to "unblock" you, work faster/more efficiently, find what keeps stalling agents, or run a project's dev env end-to-end. Subcommands `/unblock` (audit), `/unblock run <project>` (boot dev env e2e), `/unblock bootstrap <project>` (write the non-negotiable bootstrap files).
 ---
 
 # /unblock
