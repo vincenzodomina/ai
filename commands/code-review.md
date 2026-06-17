@@ -1,12 +1,18 @@
 ---
 name: code-review
-description: Code review patterns, examples, checklist and output format. Analyzes code for quality, security, performance, and best practices. Use when reviewing code changes, PRs, or doing code audits.
-source: inspired from anthropics/claude-code
+description: Conduct thorough code reviews with structured feedback on security, performance, quality, and testing. Generates trackable review documents with prioritized issues (critical/required/suggestions) and educational content. Use when reviewing PRs or code changes. Triggers on "review this code", "code review", "review PR".
 ---
 
 # Code Review
 
-## Review Categories
+Review the code pointed at or the recent changes by viewing the latest git commits. Also review how this code is integrated and interacts with the rest of the codebase.
+
+## Criteria
+
+### 0. Questions
+- How would a senior expert approach the intended code?
+- Which issues would he spot?
+- Which potential problems would he point out?
 
 ### 1. Security Review
 Check for:
@@ -37,6 +43,13 @@ Check for:
 - Poor naming
 - Missing error handling
 - Incomplete type coverage
+- Unnecessary complexity
+- Unnecessary edits
+- Redundancy
+- Brittle code
+- Overly defensive code instead of clear boundaries and interfaces
+- Fit into the overall architecture and design patterns
+- Potential for lean and clean code
 
 ### 4. Inconsintencies / Unexpected behaviors
 Check for:
@@ -46,7 +59,7 @@ Check for:
 - Code resulting in bad user experience
 - Typos and Grammar of user facing strings
 
-## Review Output Format
+## Output Format
 
 ```markdown
 ## Code Review Summary
@@ -68,47 +81,7 @@ Check for:
 - [Positive feedback on good patterns]
 ```
 
-## Common Patterns to Flag
-
-### Security
-```javascript
-// BAD: SQL injection
-const query = `SELECT * FROM users WHERE id = ${userId}`;
-
-// GOOD: Parameterized query
-const query = 'SELECT * FROM users WHERE id = $1';
-await db.query(query, [userId]);
-```
-
-### Performance
-```javascript
-// BAD: N+1 query
-users.forEach(async user => {
-  const posts = await getPosts(user.id);
-});
-
-// GOOD: Batch query
-const userIds = users.map(u => u.id);
-const posts = await getPostsForUsers(userIds);
-```
-
-### Error Handling
-```javascript
-// BAD: Swallowing errors
-try {
-  await riskyOperation();
-} catch (e) {}
-
-// GOOD: Handle or propagate
-try {
-  await riskyOperation();
-} catch (e) {
-  logger.error('Operation failed', { error: e });
-  throw new AppError('Operation failed', { cause: e });
-}
-```
-
-## Review Checklist
+## Checklist
 
 - [ ] No hardcoded secrets
 - [ ] Input validation present
