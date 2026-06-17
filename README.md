@@ -6,25 +6,28 @@ The goal is to address every step of the SDLC with processes that work for me an
 
 ## Workflow
 
-0. Bootstrap Cloud dev environment: init.sh script that downloads CLI's, start local db with migrations and seed data, populate .env files and start dev servers.
-1. [AGENTS.md](http://agents.md) at root -> Table of contents and overview of the project with pointers to docs + Gates for every step, e.g. Run tests after every change.
-2. /dependency-hygiene: so that every new feature starts with updated and audited deps (+ run tests and user testing)
-3. /plan-new-feature + First rough and lazy description (often voice dictated brain dump rambling)
-4. /grill-me: clarification questions + discuss options + back and forth
-5. /write-prd: create PRD specs from grilling conversation content 
-6. TODO: Get external docs: Read the docs/skills from the external libraries (e.g. ssh supabase.sh)
-7. TODO: Create other specs & docs: create ARD's, Implementation plans, Documentation with architecture explanations, usage examples and feature descriptions
-8. "Create implementation plan from PRD with architecture concepts according to /improve-codebase-architecture"
-8. "Please implement according to the specs and /code-guidelines"
-9. /gap-analysis: Gives itemized overview of PRD vs implementation. 
-10. "Did you implement everything according to spec already? If not, please implement the missing parts according to the specs and /code-guidelines"
-11. /deslop + /improve-code + /improve-codebase-architecture + /improve (from shadcn/improve)
-12. /testing-strategy + /write-tests + (Run tests and fix)
-13. /code-review + Loop over itemized findings with "implement" in new sessions until only minor findings remain.
-14. /update-docs
-15. /update-changelog
-16. PR's: Current Claude Code / Codex desktop apps native "Create PR" buttons or via chat is fine.
-17. /audit-instructions: At any point you expected different behavior or results, use this skill to audit the inputs and it explains what went wrong and proposes improvements to the skills or prompts.
+1. Bootstrap Cloud dev environment: init.sh script that downloads CLI's, start local db with migrations and seed data, populate .env files and start dev servers.
+2. [AGENTS.md](http://agents.md) at root -> Table of contents and overview of the project with pointers to docs + Gates for every step, e.g. Run tests after every change.
+3. /dependency-hygiene: so that every new feature starts with updated and audited deps (+ run tests and user testing)
+4. /plan-new-feature + First rough and lazy description (often voice dictated brain dump rambling)
+5. /grill-me: clarification questions + discuss options + back and forth
+6. /write-prd: create PRD specs from grilling conversation content 
+7. Get external docs: Read the docs/skills from the external libraries (e.g. ssh supabase.sh)
+8. Create other specs & docs: create ARD's, Implementation plans, Documentation with architecture explanations, usage examples and feature descriptions
+9. "Create implementation plan from PRD with architecture concepts according to /improve-codebase-architecture"
+10. "Please implement according to the specs and /code-guidelines"
+11. /gap-analysis: Gives itemized overview of PRD vs implementation. 
+12. "Did you implement everything according to spec already? If not, please implement the missing parts according to the specs and /code-guidelines"
+13. /handoff: If a separate feature or todo pops up it creates necessary context for a fresh session to continue the work there without polluting the current conversation.
+14. Edit & Re-Run prompts: I make heavy use of this via the UI to keep the conversation clean and focused on the current task.
+15. /deslop + /improve-code + /improve-codebase-architecture + /improve (from shadcn/improve)
+16. /testing-strategy + /write-tests + (Run tests and fix) + (/supabase-testing if database changes)
+17. /code-review + Loop over itemized findings with "implement" in new sessions until only minor findings remain.
+18. /update-docs: Finds outdated parts in docs and updates them to match the current implementation.
+19. /update-changelog: Incredible how much time of my life i spent doing this manually.
+20. PR's: Current Claude Code / Codex desktop apps native "Create PR" buttons or via chat is fine.
+21. /audit-instructions: At any point you expected different behavior or results, use this skill to audit the inputs and it explains what went wrong and proposes improvements to the skills or prompts.
+22. /unblock: If the agent gets stuck or wanders around too long to complete the task this identifies the roadblocks and proposes solutions to its action space to unblock it.
 
 
 TODO:
@@ -33,6 +36,7 @@ TODO:
 - Skill for "Get external docs: Read the docs/skills from the external libraries (e.g. ssh supabase.sh)"
 - Skill for "Create other specs & docs: create ARD's, Implementation plans, Documentation with architecture explanations, usage examples and feature descriptions"
 - Skill for "Deployment / CI / Provision of domains, cloud resources (Infrastructure as Code?)"
+- Test /tdd
 
 
 ## CLI's to be installed
