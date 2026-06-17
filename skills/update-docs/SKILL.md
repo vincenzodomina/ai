@@ -1,3 +1,8 @@
+---
+name: update-docs
+description: Improve existing documentation with concise, well-grounded edits.
+---
+
 # Update Documentation
 
 ### Task:

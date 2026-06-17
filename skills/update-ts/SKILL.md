@@ -1,3 +1,8 @@
+---
+name: update-ts
+description: Update TypeScript code to match the Python implementation.
+---
+
 ## Task: Update Typescript to match Python
 
 Implement the python equivalent in Typescript as close as possible with namings, signatures and order of code and code-block structures. 

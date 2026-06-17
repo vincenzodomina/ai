@@ -1,3 +1,8 @@
+---
+name: update-changelog
+description: Update changelog entries and synced package versions from recent commits.
+---
+
 # Update CHANGELOG.md
 
 ## Workflow
