@@ -1,138 +1,166 @@
 ---
 name: write-env-setup
 description: >-
-  Author, curate, or repair a repo's local-environment bootstrap script — one
-  idempotent, maintenance-grade script that takes a blank machine OR a re-woken
-  sandbox to a fully runnable, end-to-end-testable system: databases, Docker,
-  services (Redis, Supabase, workflow SDKs), native build deps, and wired .env
-  files. Use when a repo has no setup/bootstrap/onboarding script and needs one,
-  when asked to "set up local env" or write a "dev environment script", or when
-  an existing setup script needs checking, repairing, or updating.
+  Create, repair, or review repository-local environment bootstrap scripts that
+  reconcile dependencies, services, configuration, and data into a runnable
+  development stack. Use when a project needs a setup script, an existing
+  bootstrap is unreliable, or blank and re-woken environments must recover
+  predictably.
 ---
 
-# Write env setup
+# Write environment setup
 
-Produce ONE script that boots a repo's entire local stack end to end — from a
-blank machine or a slept sandbox — and re-runs safely as a maintenance tool. The
-bar is **a system that actually runs and is ready for e2e / browser / real-key
-tests**, not a database that merely starts.
+Build or curate one repository-native bootstrap script that converges the
+current machine on a runnable development system. Treat it as a
+**reconciliation loop**, not a one-time installer: cold starts, healthy re-runs,
+and wake recovery are all normal paths.
 
-The single most important rule: **you are not done until you have run the script
-for real and watched the app boot and serve a request.** Everything else is in
-service of that.
+The finish line is an app-level observable—a successful health request, login,
+or rendered page—not merely installed dependencies or running containers.
 
-## The contract
+## Outcomes
 
-The finished script must guarantee all of these. Each is testable — verify it,
-do not assume it.
+The script should:
 
-1. **Boots to green for real.** After a run, the app process starts and answers
-   a request (health endpoint, login, or a rendered page). Setting up the DB is
-   not the finish line; the running app is.
-2. **Idempotent and maintenance-grade.** Re-running does only what is missing or
-   broken. Every step checks current state first and acts only on the delta.
-3. **Blank machine AND re-woken sandbox.** First run provisions from nothing;
-   later runs on a sandbox whose containers were stopped restart only what is
-   down and leave data intact.
-4. **Cloud sandbox AND local dev.** No assumption of a pre-provisioned image:
-   detect tools, prefer what is on PATH, and cover both apt and brew, both
-   `docker compose` (v2) and `docker-compose` (v1).
-5. **Fails soft and loud.** No silent or opaque failure. Every stop prints what
-   failed, why, and the fix; degradable steps warn and continue. A coding agent
-   reading the output mid-run can act on every message.
-6. **Wires env without clobbering.** Creates missing `.env` files from running
-   services; fills blanks; never overwrites a value a human already set.
-7. **Readable by humans and agents.** A step-by-step comment header, numbered
-   sections, and one announced action per step.
+- provision the required local stack from the least-prepared supported host;
+- repair only missing, stopped, or unhealthy state on later runs;
+- preserve data and human-owned configuration;
+- explain each action and make failures actionable;
+- leave the application ready for realistic development and testing.
 
-## Process
+Support the environments the repository actually targets. Detect compatible
+tools and interfaces where those environments vary; avoid speculative platform
+branches.
 
-Work these in order. Do not skip step 6 — it is where the real requirements are
-discovered.
+## Workflow
 
-### 1. Map the repo
-Read, do not guess. Gather the prerequisite list from:
-- `package.json` / `pyproject.toml` scripts (dev, start, migrate, seed, test)
-- `docker-compose*.yml`, `Dockerfile` (what services + ports)
-- `.env.example` (every var; note which are secrets vs local)
-- `prisma/`, `migrations/`, ORM config (how the schema is applied)
-- `README`, `CLAUDE.md`, `AGENTS.md` (the canonical "run it locally" steps)
-- CI workflow files (the real, working setup sequence)
+### 1. Discover the local-system contract
 
-**Done when** you can name every service, port, migration/seed command, and
-external dependency the app needs to boot.
+Read the repository's manifests, task scripts, lockfiles, container definitions,
+example environment files, migrations, documentation, agent instructions, and
+CI setup. Trace the dependency order from host tools through services and data
+to the application.
 
-### 2. Define "ready"
-Write the end-state as a sentence: which processes run, on which ports, and the
-one request that proves it works (e.g. "API on :8000 answers `/health` 204 and
-`admin/admin` login returns a JWT; frontend on :3000 renders"). This sentence is
-your acceptance test for step 6.
+When repairing an existing script, run it first and preserve its working
+structure. Repair observed gaps rather than replacing it from assumptions.
 
-**Done when** "ready" names a concrete, checkable observable.
+**Complete when:** every required process, port, configuration source,
+migration or seed action, and external dependency needed for startup is
+accounted for.
 
-### 3. Draft from the skeleton
-Start from `skeleton.sh` (in this skill folder). Keep its comment header,
-`log/ok/warn/die` helpers, numbered section layout, `main()` ordering, and the
-resilient repo-locator. Replace the example steps with this repo's real ones.
+### 2. Define readiness
 
-**Done when** the script has a readable header, the helpers, and one function
-per prerequisite, wired into `main()`.
+State the end condition as a concrete observable: what must be running and which
+request or user flow proves the system works. This becomes the acceptance test.
 
-### 4. Make every step idempotent
-Each step is `check state → act only on the delta`. Load `reference/idempotency.md`
-for the exact patterns (state check, service restart, wake recovery, tool-present
-guard).
+**Complete when:** readiness can be checked automatically against the running
+application.
 
-**Done when** a second run with everything already up prints "already …" for
-every step and changes nothing.
+### 3. Implement reconciliation
 
-### 5. Wire the env files
-Create each `.env` from `.env.example` only if absent, then set values from the
-running services (a started service is the source of truth — e.g. Supabase CLI
-emits URL + keys on `supabase status`). Follow `reference/env-wiring.md`:
-create-if-missing, set-known-keys, fill-placeholders-only-when-blank, never
-clobber a set value.
+Follow established repository patterns. If none exists, `skeleton.sh` is an
+optional structural starting point; adapt it to the project rather than copying
+its examples literally.
 
-**Done when** re-running leaves an already-wired `.env` byte-identical, and a
-human-set value survives a run.
+Order steps by their real dependencies. Give each step a state check, the
+smallest corrective action, and clear output. Distinguish fatal prerequisites
+from optional or degradable capabilities, and include the likely remedy in any
+failure message.
 
-### 6. Run it for real and close the discovery loop
-Execute the script end to end in the target environment. Then start the app and
-check the step-2 observable. When something fails — and it will — read the error,
-fix the script, and re-run. Expect to discover, in this loop, things static
-reading misses: native build libs, services that crash on a blank key at boot,
-CLI telemetry that exits non-zero behind a proxy, health-check races. Load
-`reference/gotchas.md` for the ones already catalogued.
+**Complete when:** every action has a checkable desired state and re-running a
+healthy step leaves it unchanged.
 
-**Done when** the script ends green AND the step-2 observable passes against the
-running app.
+### 4. Close the runtime feedback loop
 
-### 7. Prove it is wake-safe
-Stop the stack's containers (simulate a slept sandbox) and re-run. Confirm it
-restarts only what is down, reports migrations as a no-op, and reaches green
-again in seconds — no re-provision, no data loss.
+Run the script in the target environment, start the application, and exercise
+the readiness check. Treat each failure as missing system knowledge: update the
+script or its assumptions, then run the full path again.
 
-**Done when** a stop-then-rerun ends green and the DB still holds its seed.
+**Complete when:** the script finishes successfully and the application-level
+observable passes.
 
-### 8. Finalize
-Leave a clean working tree (no runtime artifacts as uncommitted files, no
-committed local-only tweaks). Confirm the header's usage/flags match the code.
+### 5. Rehearse the lifecycle
 
-**Done when** `git status` is clean and `--help` matches behavior.
+Run again while healthy, then stop the local services to simulate a sleeping
+environment and run once more. Confirm that stopped state recovers, persistent
+data remains, user configuration survives, and no runtime artifacts dirty the
+repository.
 
-## Repairing an existing script
-When a script already exists, do not rewrite blind — **curate**:
-1. Run it as-is; record where it fails or does redundant work.
-2. Check it against the 7-point contract above; note each gap.
-3. Repair the gaps in place, preserving its structure and any working parts.
-4. Update the header and flags to match reality.
-5. Re-validate with steps 6 and 7 (run for real; prove wake-safe).
+**Complete when:** cold, warm, and wake-recovery runs all converge on the same
+ready system.
 
-**Done when** the existing script satisfies the contract and passes 6 and 7.
+## Agent discoverability
 
-## Reference (load on demand)
-- `skeleton.sh` — annotated, copy-and-adapt template with the header, helpers,
-  idempotent sections, wake-restart, and non-clobbering env writer.
-- `reference/idempotency.md` — state-check, restart, and wake-recovery patterns.
-- `reference/env-wiring.md` — create/set/fill-if-blank rules; source-of-truth.
-- `reference/gotchas.md` — catalogued real-world failures and their fixes.
+Add or update a local-environment section in the applicable `AGENTS.md`. Briefly
+state what the setup script provisions and verifies, point to its canonical
+repository path, and instruct agents to read the script before running,
+changing, or troubleshooting the environment. Keep `AGENTS.md` as a discovery
+pointer; leave commands and implementation details in the script as the single
+source of truth.
+
+**Complete when:** an agent entering the repository can discover the script,
+understand its role, and know when to consult it.
+
+## State reconciliation
+
+Model services as three states: healthy, present but stopped or unhealthy, and
+absent. Skip healthy state, recover existing state when possible, and provision
+only when necessary. A process being present is weaker evidence than its
+readiness check.
+
+Apply the same distinction to artifacts:
+
+- installed artifacts are reused while valid;
+- cheap derived artifacts may be regenerated to repair partial state;
+- migrations should naturally no-op when current;
+- repeatable seeds preserve or upsert existing data unless reset is explicit.
+
+A warm run should be dominated by health checks, not downloads, installs, or
+re-provisioning.
+
+## Environment configuration
+
+Wire configuration after local services are ready so real endpoints and local
+credentials are available. Start from the repository's example file when a
+local file is absent, and keep separate applications' configuration coherent.
+
+Classify values by ownership:
+
+- **service-owned values** are deterministic outputs of the local stack and may
+  be refreshed from that source of truth;
+- **human-owned values** are filled only when missing or blank and otherwise
+  preserved;
+- **boot placeholders** are acceptable only when an integration requires a
+  non-empty value to start and the placeholder leaves that integration inert.
+
+Local secret files remain uncommitted. Verify ownership by pre-setting a human
+value, running twice, and confirming it is unchanged.
+
+## Runtime learnings
+
+Static inspection rarely reveals the full environment. Use observed failures to
+refine the system contract:
+
+- build failures expose genuinely required host libraries;
+- startup failures expose eager configuration requirements;
+- early migrations expose service-readiness races;
+- stopped resources expose gaps between existence and health;
+- wrapper processes expose child-process or port cleanup needs;
+- network and TLS errors expose policy, trust, or distribution constraints;
+- generated files expose what must be tracked, ignored, or stabilized;
+- equivalent tool variants expose where capability detection is needed.
+
+Encode only learnings that apply to this repository. Surface policy constraints
+and use supported trust or installation paths instead of weakening security.
+
+## Completion gate
+
+Finish only when all of these are true:
+
+- a cold run reaches the defined readiness observable;
+- a healthy re-run makes no unintended changes;
+- a stop-and-re-run recovers without data loss;
+- human-owned configuration remains intact;
+- output explains failures and recovery actions;
+- usage documentation, flags, and the `AGENTS.md` pointer match behavior;
+- the working tree contains no unintended runtime changes.

@@ -138,7 +138,7 @@ install_deps() {
 }
 
 # 6. Env files — create-if-missing; set known keys; fill placeholders only when
-#    blank; NEVER clobber a set value. See reference/env-wiring.md.
+#    blank; NEVER clobber a human-owned value. See SKILL.md.
 write_env() {
   log "<app>/.env"
   local f="$REPO_DIR/.env"; [ -f "$f" ] || cp "$REPO_DIR/.env.example" "$f"
