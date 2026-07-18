@@ -13,8 +13,10 @@ description: Update changelog entries and synced package versions from recent co
 3. Add a new CHANGELOG entry with a new date from today with
 - a new semantic minor version update for additions
 - a semantic patch version update if only fixes were applied
-4. Run this workflow for @aidl/CHANGELOG.md, and also for @aidl-web/CHANGELOG.md if not specified otherwise
-5. Sync the same updated semantic version in @aidl/pyproject.toml (under project.version, 3rd line) or in @aidl-web/package.json (under version, 3rd line)
+4. Run this workflow for <root>/CHANGELOG.md, and also for <root>/apps/web/CHANGELOG.md if not specified otherwise
+5. Sync the same updated semantic version across all relevant files, e.g.:
+   - <root>/pyproject.toml (`project.version`, 3rd line), or
+   - <root>/apps/web: **both** root `package.json` and `apps/web/package.json` (`version`, 3rd line) — keep these two aligned
 
 ## Rules:
 - Only add a new update entry, if recent commits have not been added already
