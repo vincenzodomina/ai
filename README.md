@@ -51,6 +51,9 @@ npm install -g @googleworkspace/cli
 - Office 2 LLM
 https://github.com/vincenzodomina/office2llm
 
+- Email 2 LLM
+https://github.com/vincenzodomina/email2llm
+
 - FFmpeg
 https://www.ffmpeg.org/download.html
 
