@@ -1,14 +1,14 @@
 ---
 name: code-guidelines
-description: Conduct thorough code generation respecting these code guidelines regarding how to fix, the way code should be changed, pattern use and comments
+description: Use when implementing code. Read before code generation to know about how this project expects code to be structured and maintained and how to approach fixes, edits, code integration, external libraries, comments and docs.
 ---
 
 ### Code Guidelines
 
-- ***No quick fixes or workarounds:*** if not specifically asked for. Look up how the targeted code is integrated and prefer a proper and elegant code changes
-- ***Least amount of code change:*** Only apply as many code edits as necessary for the task, do not delete other comments, do not apply fixes unrelated to the task, instead you can mention that in your response.
-- ***Re-use existing patterns:*** As much as possible stick to already implemented patterns, libraries, code style and concepts. If you think deviating from this principle leads to significant improvement, you can ask for user confirmation, before implementing those.
-- ***No unnecessary comments in the code:*** The code should be self-explanatory and should not need comments. Your response is where you can explain the code and the changes you are making, not in comments or doc strings. Comments should only be added when adding real value or explaining decisions and the "why", never for mentioning previous behavior or changes and never for repeating the code or pointing out the obvious. If added, comments should not span more than 1-2 lines.
+- ***Focused code edits:*** Only apply focused code edits, necessary for the task. Do not delete other unrelated comments. Do not apply fixes unrelated to the task, instead you can mention findings in your response.
+- ***No quick fixes, workarounds or hacks:*** if not specifically asked for. Optimize for clean code and deep modules with high locality which align with the PRDs in this project (read them, probably under docs/prds/) and their intended architecture and patterns. If you really need to solve the immediate problem, mention it in your response and explain why it is necessary and how it deviates from the PRDs and the ideal long term solution.
+- ***Keep codebase size and complexity at a minimum:*** Every new line of code, helper, module, dependency or pattern should be justified in the response (not in code comments). Evaluate first if an exsting pattern, helper, module, dependency, or library can be reused or extended to solve the problem.
+- ***No unnecessary comments in the code:*** The code should be self-explanatory and should not need comments. Your response is where you can explain the code and the applied changes or historical prose about previous state, not in comments or doc strings. Comments should only be added when adding real value or explaining decisions and the "why", never for mentioning previous behavior or changes and never for repeating the code or pointing out the obvious. If added, comments should not span more than 1-2 lines.
 
 ### External Library Code
 
