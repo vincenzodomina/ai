@@ -1,0 +1,39 @@
+---
+name: implement
+description: Use when implementing code. Read before code generation to know about how this project expects code to be structured and maintained and how to approach fixes, edits, code integration, external libraries, comments and docs.
+---
+
+# Task
+- Implement the requested code changes, following the code guidelines and external library guidelines and documents editing guidelines.
+- Ask me for clarifications along the way where the targeted implementation is not clearly defined or needs decisions.
+- If new dependencies are justified, also use the dependency-hygiene skill if available.
+- If implementation involves larger refactoring or touches multiple modules, also use the improve-codebase-architecture skill.
+- If you added many new tests, also use the test-suite-strategy skill.
+- After implementation, use the code-review skill.
+
+
+### Code Guidelines
+
+- ***Focused code edits:*** Only apply focused code edits, necessary for the task. Do not delete other unrelated comments. Do not apply fixes unrelated to the task, instead you can mention findings in your response.
+- ***No quick fixes, workarounds or hacks:*** if not specifically asked for. Align with the PRDs in this project (read them, probably under docs/prds/) and their intended architecture and requirements. If you really need to solve the immediate problem, mention it in your response and explain why it is necessary and how it deviates from the PRDs and the ideal long term solution.
+- ***Keep codebase size and complexity at a minimum:*** Every new line of code, helper, module, dependency or pattern should be justified in the response (not in code comments). Evaluate first if an exsting pattern, helper, module, dependency, or library can be reused or extended to solve the problem. Prefer deep modules with small, generalized interfaces, high locality and minimal coupling. Before finishing, apply a deletion test to each new abstraction, mapping, and transformation: remove it or reuse existing machinery if required behavior survives; retain it only for a concrete requirement.
+- ***No unnecessary comments in the code:*** The code should be self-explanatory and should not need comments. Your response is where you can explain the code and the applied changes or historical prose about previous state, not in comments or doc strings. Comments should only be added when adding real value or explaining decisions and the "why", never for mentioning previous behavior or changes and never for repeating the code or pointing out the obvious. If added, comments should not span more than 1-2 lines.
+
+### External Library Code
+
+- ***Do not write external library code from memory:*** Treat remembered APIs, options, defaults, model names, integration patterns, and examples as potentially outdated. Libraries change frequently, so always verify library-related code against the version actually used in the project.
+- ***Check the installed version first:*** Inspect the dependency version in the project manifest, lockfile, or the package's installed metadata, such as `node_modules/<package>/package.json`. When useful, compare it with the latest published version through the project's package manager, for example `npm view <package> version`.
+- ***Use version-matched bundled docs and source when available:*** Prefer documentation, examples, type definitions, and source code shipped inside the installed package, such as `node_modules/<package>/docs/`, `node_modules/<package>/src/`, `node_modules/<package>/README.md`, and provider or framework companion package docs. These usually match the installed version better than memory or generic web snippets.
+- ***Search current official docs when bundled docs are missing or incomplete:*** Use the library's official documentation site, API reference, migration guides, changelog, repository, and source code. When docs offer markdown versions, search endpoints, or version selectors, use them to locate exact current guidance.
+- ***Verify related packages separately:*** Provider adapters, framework bindings, plugins, and companion packages can have their own docs, versions, defaults, and breaking changes. Check those packages directly before using their APIs.
+- ***Do not guess unsupported behavior:*** If the docs and source do not confirm an API, option, default, or pattern, say so explicitly and choose a documented approach.
+- ***Keep external-library changes minimal and explicit:*** Only install or upgrade packages that are required for the task, use the project's package manager, and avoid over-specifying options whose documented defaults already do the right thing.
+- ***Validate after changing library integrations:*** Run the relevant type checker, linter, and tests. If errors appear, re-check the current docs and installed source before assuming the remembered API is correct.
+
+### Documentation Editing Guidelines
+
+- **READMEs:** Are not a place for specific implementation details, logging or historical decisions. Do not edit them if not explicitely asked for. They are for human consumption: Introduction, Getting started, Product overviews, Feature highlights, Important Information. They should stay slim.
+- **PRDs:** On every new decision, intent or requirement/behavior change stated during conversation, compare the existing PRD and propose changes to reflect those, but never commit them without human review and confirmation. PRDs capture high-level stakeholder behavior and explicitly approved architectural constraints. Before adding normative text, classify it as a requirement, an architectural constraint, or an implementation observation. Only the first two may define requirements or constraints; scope exclusions belong in Non-Goals. Release observations, workarounds, temporary limitations, and verification results must not become requirements by accumulation. When existing prose conflicts with current intent or runtime evidence, surface the conflict for review rather than treating it as an unquestionable implementation mandate. PRDs are standalone documents, not status trackers or implementation histories, and should not reference temporary or downstream implementation/todo/migration documents.
+- **Release review/upgrade docs:** Should remain only be treated as context and as recommendations for improvement potentials. They are not requirements, they should not be used for status tracking and decision/intent logging, thats what the PRDs are for. Do not edit them during implementation, only during actual release reviews.
+- **TODOs:** This is a place to note down found issues during work that are better placed in a follow up/dedicated session because we are focusing on other parts and better stay focused. But as soon as an item is implemented, superseded by a better solution or decision, it should be removed completely. Do not just mark it as "Done" and keep it there. This is not a place for implementation history and rationale, just a concise note of what needs to be done and why.
+- **New Doc Files:** Create if really necessary and value add. Do not create redundancy across documents and prose bloat. During an implementation slice that typically goes into a PR, only the PR body description is the place you should place rationales, historical logs and narration, verification logs, "what you did not do" - anything useful to reason about a change made. The code and documentation should ideally only be a latest state or described ideal end state/long term state. For anything you are telling me in the conversation messages for what i need to now right now during the task, those parts do not need to be repeated in documents in the codebase. Code is the truth to review, not stale and bloated docs.
