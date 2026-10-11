@@ -121,18 +121,9 @@ Default bias:
 
 ---
 
-## Mandatory Deletion & Consolidation Rule
+## Consolidation Review
 
-For EVERY new or modified test, you MUST also evaluate:
-
-* Can an existing test be **removed**?
-* Can multiple tests be **merged**?
-* Is there **duplicate coverage across layers**?
-* Is there a **flaky or low-signal test** that should be deleted?
-
-If the suite grows without increasing signal → you are degrading it.
-
-Adding tests without removing or consolidating is considered a failure.
+Evaluate consolidation for every test change; remove redundancy where found. Retain necessary new coverage even when no deletion is justified.
 
 ---
 
@@ -196,8 +187,6 @@ Continuously:
 
 A larger test suite is NOT a better test suite.
 
-A test suite that does not shrink over time is unhealthy.
-
 ---
 
 ## Output Rule for AI
@@ -207,6 +196,6 @@ When proposing or writing tests:
 1. Provide the **mandatory decision protocol (4 statements)**
 2. Show **risk score (0–8)**
 3. Justify **why this test improves suite-level confidence**
-4. Identify at least **one candidate for removal, merge, or simplification**
+4. Report consolidation opportunities, or explain why none is justified
 
 If you cannot justify the test → do NOT write it
