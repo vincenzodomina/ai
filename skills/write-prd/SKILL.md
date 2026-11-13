@@ -74,7 +74,16 @@ A long, numbered table of user stories. Each user story should be in the format 
 As a mobile bank customer, I want to see balance on my accounts, so that I can make better informed decisions about my spending
 </user-story-example>
 
-Requirements are meant to be atomic invariants that capture expected functional behavior from the perspective of stakeholders. They should not contain any implementation details or technical clarifications, which belong into the constraints section instead.
+Requirements are atomic **user-observable invariants**: what the user can do, experience, or rely on, and why it matters to them. Derive them from the user's needs, independently of your recommended solution or end-state design. Name an actual user of the capability, including developers or operators when they consume an exposed product capability.
+
+Before finalizing, check every clause of every requirement, including its "so that" clause:
+
+- **Observable:** Can the named user judge whether it holds through their product experience, without knowing hidden architecture, processing, or state?
+- **Solution-independent:** Would it still hold if a different implementation delivered the same user experience?
+
+Rewrite failing clauses as user-visible outcomes until every clause passes both checks. Put agreed technical decisions and clarifications in Constraints, and implementation recommendations in the separate implementation plan.
+
+For example: "As a user, I want results from background work to appear in my conversation without sending another message, so that I receive the outcome of work I already requested." This specifies the experience while leaving the delivery mechanism open.
 
 ## 5. Testing
 
