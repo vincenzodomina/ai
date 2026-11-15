@@ -1,6 +1,6 @@
 ---
 name: challenge-codebase
-description: Challenge implemented features and PRD requirements for simplification. Use only when asked for.
+description: Challenge implementation and requirements for simplification. Use only when asked for.
 ---
 
 Challenge current requirements and implementation, especially accumulated compromises, stale implementation choices and dumb requirements. Be bold: Find the lowest-cost ways to make the system materially smaller by proposing substantial refactors, narrower scope or deletion while preserving core product goals.
