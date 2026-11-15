@@ -1,7 +1,9 @@
 ---
 name: challenge-codebase
-description: Challenge Codebase is a read-only review for substantially less code, fewer files, and less system complexity. Use when asked to challenge implemented features or PRD requirements for simplification, including after an architecture review.
+description: Bold challenging of requirements and current implementation. Use when asked to challenge implemented features or PRD requirements for simplification.
 ---
+
+Challenge whether the current requirements and implementation still justify their complexity. Revisit accumulated compromises, superseded assumptions and features whose value no longer warrants their cost. Propose substantial refactors, narrower scope or deletion while preserving the main product goals.
 
 Find the lowest-cost ways to make the system materially smaller while preserving its main product goals. Challenge the requirements that create complexity, beyond finding unused code.
 
@@ -14,8 +16,8 @@ Review only. No edits. Report in chat. Leave source, documentation, configuratio
    - Parallel tooling, unused configuration and speculative extension paths whose maintenance exceeds their present value.
    - Implemented features, inference passes, compatibility breadth or PRD invariants that could be narrowed, made deterministic or deferred for a worthwhile reduction.
    - Which PRD invariants have the highest cost in terms of code, complexity, and operational burden compared to the value they provide. Propose wording edits or deletion.
-
-   For each candidate, explain what user value it buys and what disappears if removed. Separate optional convenience from guarantees supporting correctness and core goals. Mark changes to explicit user decisions or ADRs as product decisions, not routine cleanup.
+   - Revisit low-value PRD requirements and stale implementation decisions accumulated through repeated iteration.
+   - include worthwhile proposals that reopen prior user decisions or ADRs. State the evidence, capability lost and decision required; existing implementation is not itself a justification for keeping a feature.
 
 3. **Apply the deletion test.** Trace enough consumers to identify the actual removable code and affected behavior. Distinguish fewer files, fewer lines and lower operational complexity; moving code elsewhere is not a net reduction. Deferring an unbuilt feature saves future work, not current code. Label estimates and overlapping savings. Identify effects outside the target, including shared callers, schemas/migrations, dependencies, deployment and downstream behavior.
 
