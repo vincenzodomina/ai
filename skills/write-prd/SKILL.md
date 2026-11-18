@@ -14,7 +14,7 @@ description: How to write or edit a PRD for the given user request. Use when use
 ### Don'ts
 
 - Do not mention any internal implementation details like database table names or field names or method or variable names.
-- Do not mention parts from previous versions of the PRD or implementation. Only the current state is relevant. If necessary or requested, mention it only in a dedicated Decisions section.
+- Describe the intended product end state. Keep implementation status, history, phases and delivery sequencing in the implementation plan.
 - Do not repeat the same facts or information (across sections) if not really necessary. Optimize for brevity and clarity.
 - Do not mention non-goals outside of the non-goals section.
 - Do not re-write too much at once. Optimize for small, incremental edits for better diff readability and reviewability.
@@ -68,22 +68,22 @@ This can include:
 
 | **FR-1.**  | Description or User Story |
 
-A long, numbered table of user stories. Each user story should be in the format of:
+A numbered table of user stories. Each user story should be in the format of:
 
 <user-story-example>
 As a mobile bank customer, I want to see balance on my accounts, so that I can make better informed decisions about my spending
 </user-story-example>
 
-Requirements are atomic **user-observable invariants**: what the user can do, experience, or rely on, and why it matters to them. Derive them from the user's needs, independently of your recommended solution or end-state design. Name an actual user of the capability, including developers or operators when they consume an exposed product capability.
+Requirements are distinct invariants describing **user-observable outcomes or experiences**: what the user can do, experience, or rely on, and why it matters to them. Derive them from the user's needs, independently of your recommended solution or end-state design. Name an actual user of the capability, including developers or operators when they consume an exposed product capability.
 
-Before finalizing, check every clause of every requirement, including its "so that" clause:
+Before finalizing, check every requirement and its "so that" clause:
 
+- **Intent:** Does it express the user's need rather than a proposed mechanism?
 - **Observable:** Can the named user judge whether it holds through their product experience, without knowing hidden architecture, processing, or state?
 - **Solution-independent:** Would it still hold if a different implementation delivered the same user experience?
+- **Consolidated:** Is each distinct user outcome expressed once, with related cases captured through their shared intent?
 
-Rewrite failing clauses as user-visible outcomes until every clause passes both checks. Put agreed technical decisions and clarifications in Constraints, and implementation recommendations in the separate implementation plan.
-
-For example: "As a user, I want results from background work to appear in my conversation without sending another message, so that I receive the outcome of work I already requested." This specifies the experience while leaving the delivery mechanism open.
+Revise until every requirement passes all four checks. Put agreed technical decisions and clarifications in Constraints, and implementation recommendations in the separate implementation plan.
 
 ## 5. Testing
 
