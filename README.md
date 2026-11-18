@@ -25,12 +25,13 @@ The goal is to address every step of the SDLC with processes that work for me an
 17. [/test-suite-strategy](skills/test-suite-strategy/SKILL.md) + [/write-tests](skills/write-tests/SKILL.md) + (Run tests and fix) + ([/supabase-testing](skills/supabase-testing/SKILL.md) if database changes)
 18. [/code-review](skills/code-review/SKILL.md) + Loop over itemized findings with "[implement](skills/implement/SKILL.md)" in new sessions until only minor findings remain.
 19. [/forge](skills/forge/SKILL.md): review recent changes against the running full stack, fix defects and repeat verification with automated tests and real user journeys before PR handoff.
-20. [/update-docs](skills/update-docs/SKILL.md): Finds outdated parts in docs and updates them to match the current implementation.
-21. [/update-changelog](skills/update-changelog/SKILL.md): Incredible how much time of my life i spent doing this manually.
-22. [/pr](skills/pr/SKILL.md): draft the PR body with intent, verification evidence and merge risk. Create the PR through chat or the app's native controls.
-23. [/fix-pr-review](skills/fix-pr-review/SKILL.md): evaluate reviewer comments, fix valid findings, and respond to and resolve review threads.
-24. [/audit-instructions](skills/audit-Instructions/SKILL.md): At any point you expected different behavior or results, use this skill to audit the inputs and it explains what went wrong and proposes improvements to the skills or prompts.
-25. [/unblock](skills/unblock/SKILL.md): If the agent gets stuck or wanders around too long to complete the task this identifies the roadblocks and proposes solutions to its action space to unblock it.
+20. [/improve-forge-results](skills/improve-forge-results/SKILL.md): review and improve forge fixes against requirements
+21. [/update-docs](skills/update-docs/SKILL.md): Finds outdated parts in docs and updates them to match the current implementation.
+22. [/update-changelog](skills/update-changelog/SKILL.md): Incredible how much time of my life i spent doing this manually.
+23. [/pr](skills/pr/SKILL.md): draft the PR body with intent, verification evidence and merge risk. Create the PR through chat or the app's native controls.
+24. [/fix-pr-review](skills/fix-pr-review/SKILL.md): evaluate reviewer comments, fix valid findings, and respond to and resolve review threads.
+25. [/audit-instructions](skills/audit-Instructions/SKILL.md): At any point you expected different behavior or results, use this skill to audit the inputs and it explains what went wrong and proposes improvements to the skills or prompts.
+26. [/unblock](skills/unblock/SKILL.md): If the agent gets stuck or wanders around too long to complete the task this identifies the roadblocks and proposes solutions to its action space to unblock it.
 
 
 TODO:
