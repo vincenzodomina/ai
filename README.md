@@ -34,7 +34,18 @@ The goal is to address every step of the SDLC with processes that work for me an
 26. [/unblock](skills/unblock/SKILL.md): If the agent gets stuck or wanders around too long to complete the task this identifies the roadblocks and proposes solutions to its action space to unblock it.
 
 
-TODO:
+## Notes
+
+The core workflow essentially is:
+implement → PR → forge → improve-forge-results
+while most of the other skills are for every now and then..
+
+For operational convenience i seperate implementation from test-fixing PRs, because:
+- using the adversarial advantage
+- I don't want all the testers implementation opinions in my implementation PR, only the findings → often i disagree with 20% from Opus and let Astra cherry pick and improve valid findings with respect to our guidelines and PRDs, which i dont want to instruct Opus directly while testing to not instruct-overload to let him focus on finding within the live stack env
+- on the go reviewing PRs on GitHub interface is easier than in the AI apps
+
+## TODO
 
 - Integrate with /goal for full-workflow orchestration, clarification triage and mobile/desktop continuity. [/forge](skills/forge/SKILL.md) already covers the review/fix/verification loop.
 - Skill for "Get external docs: Read the docs/skills from the external libraries (e.g. ssh supabase.sh)"
